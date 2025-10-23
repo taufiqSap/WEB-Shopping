@@ -1,0 +1,10 @@
+<nav class="bg-white shadow-lg py-5 px-8 flex justify-between items-center fixed top-0 left-0 right-0 z-50 border-b border-gray-100">
+    <a href="/" class="text-3xl font-bold text-blue-800 tracking-tight hover:text-black-800 transition-all duration-300">Sentul Fishing</a>
+    <ul class="flex gap-12 items-center mr-8">
+        <li><a href="/about" class="text-blcak-700 font-semibold text-lg hover:text-blue-500 transition-all duration-300 relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-blue-500 after:to-blue-400 after:left-1/2 after:-translate-x-1/2 after:-bottom-1 hover:after:w-full after:transition-all after:duration-300">About Us</a></li>
+        <li><a href="/blog" class="text-blcak-700 font-semibold text-lg hover:text-blue-500 transition-all duration-300 relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-blue-500 after:to-blue-400 after:left-1/2 after:-translate-x-1/2 after:-bottom-1 hover:after:w-full after:transition-all after:duration-300">Blog</a></li>
+        <li><a href="/arrival" class="text-blcak-700 font-semibold text-lg hover:text-blue-500 transition-all duration-300 relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-blue-500 after:to-blue-400 after:left-1/2 after:-translate-x-1/2 after:-bottom-1 hover:after:w-full after:transition-all after:duration-300">New Arrival</a></li>
+        <li><a href="/Shop" class="text-blcak-700 font-semibold text-lg hover:text-blue-500 transition-all duration-300 relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-blue-500 after:to-blue-400 after:left-1/2 after:-translate-x-1/2 after:-bottom-1 hover:after:w-full after:transition-all after:duration-300">Shop</a></li>
+        
+    </ul>
+</nav>
