@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>@yield('title', 'Sentul Fishing')</title>
-    
     @vite('resources/css/app.css')
     @livewireStyles
 </head>

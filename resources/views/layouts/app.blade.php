@@ -2,21 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>@yield('title', 'Company Profile')</title>
-      @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@yield('title', 'Admin Panel - Sentul Fishing')</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-50">
 
     {{-- Navbar di atas --}}
     @include('partials.adminbar')
 
-    <div class="flex">
+    <div class="flex pt-16"> {{-- Added pt-16 untuk offset fixed navbar --}}
         {{-- Sidebar --}}
         @include('partials.sidebar')
 
         {{-- Main Content --}}
-        <main class="flex-1 p-8">
+        <main class="flex-1 p-6 ml-64"> {{-- Added ml-64 untuk offset sidebar --}}
             @yield('content')
         </main>
     </div>

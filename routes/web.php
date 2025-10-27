@@ -18,8 +18,11 @@ Route::get('/new-arrivals', NewArrival::class)->name('new-arrivals');
 // Protected routes
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
-    Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+   Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+    Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
+    Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
     Route::resource('products', ProductController::class);
+    Route::get('/products/{slug}', [ProductController::class, 'byCategory'])->name('products.byCategory');
     Route::resource('orders', OrderController::class);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

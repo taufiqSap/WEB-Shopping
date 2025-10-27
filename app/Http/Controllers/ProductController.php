@@ -4,13 +4,27 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Category;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::latest()->paginate(10);
-        return view('products.index', compact('products'));
+        $query = Product::query();
+        $selectedCategory = null;
+
+        // Filter by category if slug is provided
+        if ($request->has('category')) {
+            $category = Category::where('slug', $request->category)->first();
+            if ($category) {
+                $query->where('category_id', $category->id);
+                $selectedCategory = $category;
+            }
+        }
+
+        $products = $query->latest()->paginate(10);
+        
+        return view('products.index', compact('products', 'selectedCategory'));
     }
 
     public function show($id)
@@ -46,10 +60,11 @@ class ProductController extends Controller
             ->with('success', 'Produk berhasil diperbarui');
     }
 
-    public function create()
-    {
-        return view('products.create');
-    }
+public function create()
+{
+    $categories = Category::all();
+    return view('products.create', compact('categories'));
+}
 
     public function store(Request $request)
     {
@@ -82,5 +97,12 @@ class ProductController extends Controller
 
         return redirect()->route('products.index')
             ->with('success', 'Produk berhasil dihapus');
+    }
+
+    public function byCategory($slug)
+    {
+        $category = Category::where('slug', $slug)->firstOrFail();
+        $products = $category->products()->latest()->paginate(10);
+        return view('products.by_category', compact('category', 'products'));
     }
 }
