@@ -165,12 +165,6 @@
             currentSlide = 1;
         }
 
-        // Auto focus email input when arriving at login form
-        slider.addEventListener('transitionend', function() {
-            if (currentSlide === 2) {
-                document.getElementById('email').focus();
-            }
-        });
 
         // Optional: Auto advance to login form after 3 seconds on welcome screen
         setTimeout(() => {
