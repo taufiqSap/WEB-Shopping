@@ -11,6 +11,6 @@ class NewArrival extends Component
     {
         return view('livewire.new-arrival',[
             'products' => Product::latest()->take(9)->get()
-        ])->layout('layouts.guest');
+        ])->layout('layouts.livewire');
     }
 }
