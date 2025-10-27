@@ -2,13 +2,32 @@
 
 @section('content')
 <div class="min-h-screen bg-gray-50">
-    <!-- Hero Section -->
-    <section class="relative bg-blue-900 text-white py-20">
-        <div class="container mx-auto px-4 text-center">
-            <h1 class="text-5xl font-bold mb-4">SENTUL FISHING</h1>
-            <p class="text-2xl mb-8">PREMIUM FISHING GEAR</p>
-            <div class="bg-red-600 inline-block px-6 py-2 rounded-full">
-                <span class="text-xl font-bold">ULTIMATE SALE</span>
+    <!-- Hero Section - Full Background Image -->
+    <section class="relative text-white min-h-screen flex items-end overflow-hidden">
+        <!-- Background Image with Subtle Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="{{ asset('assets/unnamed.jpg') }}" 
+                 alt="Fishing Background" 
+                 class="w-full h-full object-cover">
+            <!-- Lighter overlay for better image visibility -->
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-gray-900/30"></div>
+        </div>
+
+        <!-- Watermark Text - Left Side (More Subtle) -->
+        <div class="absolute left-0 top-1/2 -translate-y-1/2 z-0 opacity-5">
+            <div class="transform -rotate-90 origin-left">
+                <h2 class="text-[15rem] font-black text-white whitespace-nowrap tracking-wider">
+                    SENTUL FISHING
+                </h2>
+            </div>
+        </div>
+
+        <!-- Watermark Text - Right Side (More Subtle) -->
+        <div class="absolute right-0 top-1/2 -translate-y-1/2 z-0 opacity-5">
+            <div class="transform rotate-90 origin-right">
+                <h2 class="text-[15rem] font-black text-white whitespace-nowrap tracking-wider">
+                    SENTUL FISHING
+                </h2>
             </div>
         </div>
     </section>
@@ -19,7 +38,7 @@
             <div class="flex justify-between items-center mb-12">
                 <h2 class="text-3xl font-bold text-gray-800">New Arrivals</h2>
                 <a href="{{ route('new-arrivals') }}" 
-                   class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors duration-200 flex items-center space-x-2">
+                   class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors duration-200 flex items-center space-x-2 shadow-lg">
                     <span>View All Products</span>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -36,7 +55,7 @@
                     @foreach($latestProducts as $product)
                     <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
                         <!-- Product Image -->
-                        <div class="h-64 bg-gray-200 flex items-center justify-center overflow-hidden">
+                        <div class="h-48 bg-gray-200 flex items-center justify-center overflow-hidden">
                             @if($product->image)
                                 <img src="{{ asset('storage/' . $product->image) }}" 
                                      alt="{{ $product->name }}" 
@@ -52,31 +71,27 @@
                         </div>
                         
                         <!-- Product Info -->
-                        <div class="p-6">
-                            <div class="mb-3">
-                                <span class="inline-block px-3 py-1 text-xs font-semibold text-blue-600 bg-blue-100 rounded-full">
+                        <div class="p-4">
+                            <div class="mb-2">
+                                <span class="inline-block px-2 py-1 text-xs font-semibold text-blue-600 bg-blue-100 rounded">
                                     {{ $product->category->name ?? 'Uncategorized' }}
                                 </span>
                             </div>
-                            <h3 class="text-xl font-bold mb-2 text-gray-800">{{ $product->name }}</h3>
-                            <p class="text-gray-600 mb-4 text-sm line-clamp-2">{{ Str::limit($product->description, 100) }}</p>
-                            <div class="flex justify-between items-center">
-                                <span class="text-2xl font-bold text-blue-600">
+                            <h3 class="text-lg font-semibold mb-2 text-gray-800">{{ $product->name }}</h3>
+                            <p class="text-gray-600 mb-4 text-sm line-clamp-2">{{ Str::limit($product->description, 80) }}</p>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-xl font-bold text-blue-600">
                                     Rp {{ number_format($product->price, 0, ',', '.') }}
                                 </span>
                                 @if($product->stock > 0)
-                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                        <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                        </svg>
-                                        In Stock
+                                    <span class="text-green-600 text-sm font-medium">
+                                        Stock: {{ $product->stock }}
                                     </span>
                                 @else
-                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800">
-                                        Out of Stock
-                                    </span>
+                                    <span class="text-red-600 text-sm font-medium">Out of Stock</span>
                                 @endif
                             </div>
+                           
                         </div>
                     </div>
                     @endforeach
@@ -149,12 +164,12 @@
             padding-right: 1rem;
         }
         
-        .text-5xl {
-            font-size: 2.5rem;
+        .text-6xl {
+            font-size: 3rem;
         }
         
-        .text-2xl {
-            font-size: 1.25rem;
+        .text-3xl {
+            font-size: 1.5rem;
         }
     }
 
@@ -163,6 +178,29 @@
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
         overflow: hidden;
+    }
+
+    /* Smooth scroll */
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #3b82f6;
+        border-radius: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #2563eb;
     }
 </style>
 @endsection
