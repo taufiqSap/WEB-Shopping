@@ -8,14 +8,20 @@
 </head>
 <body class="bg-gray-100">
 
-    {{-- Navbar di atas konten --}}
+    {{-- Navbar di atas --}}
     @include('partials.adminbar')
 
-    <main class="py-8">
-        @yield('content')
-    </main>
+    <div class="flex">
+        {{-- Sidebar --}}
+        @include('partials.sidebar')
 
-    {{-- Footer di bawah konten --}}
+        {{-- Main Content --}}
+        <main class="flex-1 p-8">
+            @yield('content')
+        </main>
+    </div>
+
+    {{-- Footer di bawah --}}
     @include('partials.adminter')
 
     @livewireScripts

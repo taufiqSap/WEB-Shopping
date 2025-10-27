@@ -4,77 +4,83 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+
 class ProductController extends Controller
 {
     public function index()
     {
         $products = Product::latest()->paginate(10);
-        return view('admin.products.index', compact('products'));
+        return view('products.index', compact('products'));
     }
 
     public function show($id)
     {
-        $products = Product::findOrfail($id);
-        return view('admin.products.show', compact('products'));
+        $product = Product::findOrFail($id);
+        return view('products.show', compact('product'));
     }
 
     public function edit($id)
     {
-        $products = Product::findOrfail($id);
-        return view('admin.products.edit', compact('products'));
+        $product = Product::findOrFail($id);
+        return view('products.edit', compact('product'));
     }
 
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
-        $validate->Validate([
-            'name'=>'required|string|max:255',
-            'description'=>'required|string',
-            'price'=>'required|numeric',
-            'stock'=>'required|integer',
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'price' => 'required|numeric',
+            'stock' => 'required|integer',
         ]);
 
-        $products = Product::findOrfail($id);
-        $products = Product::update([
-            'name'=>$request->name,
-            'description'=>$request->description,
-            'price'=>$request->price,
-            'stock'=>$request->stock,
+        $product = Product::findOrFail($id);
+        $product->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'stock' => $request->stock,
         ]);
-        return redirect()->route()->with('success','Produk berhasil duperbarui');
+
+        return redirect()->route('products.index')
+            ->with('success', 'Produk berhasil diperbarui');
     }
 
     public function create()
     {
-        return view('admin.products.create');
+        return view('products.create');
     }
 
-    public function store (Request $request)
-
+    public function store(Request $request)
     {
-        $validate->Validate([
-            'category_id'=>'required|integer',
-            'name'=>'required|string|max:255',
-            'description'=>'required|string',
-            'price'=>'required|numeric',
-            'stock'=>'required|integer',
-            'image'=>'nullable|image|max:2048',
+        $request->validate([
+            'category_id' => 'required|integer',
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'price' => 'required|numeric',
+            'stock' => 'required|integer',
+            'image' => 'nullable|image|max:2048',
         ]);
 
-        $product = Product::create([
-            'category_id'=>$request->category_id,
-            'name'=>$request->name,
-            'description'=>$request->description,
-            'price'=>$request->price,
-            'stock'=>$request->stock,
-            'image'=>$request->image,
+        Product::create([
+            'category_id' => $request->category_id,
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'stock' => $request->stock,
+            'image' => $request->image,
         ]);
-        return redirect()->route('admin.products.index')->with('success','Produk berhasil ditambahkan');
+
+        return redirect()->route('products.index')
+            ->with('success', 'Produk berhasil ditambahkan');
     }
 
     public function destroy($id)
     {
-        $products = Product::findOrfail($id);
-        $products->delete();
-        return redirect()->route('admin.products.index')->with('success','Produk berhasil dihapus');
+        $product = Product::findOrFail($id);
+        $product->delete();
+
+        return redirect()->route('products.index')
+            ->with('success', 'Produk berhasil dihapus');
     }
 }

@@ -10,23 +10,23 @@ class OrderController extends Controller
     public function index()
     {
         $order = Order::latest()->paginate(10);
-        return view('admin.orders.index', compact('order'));
+        return view('orders.index', compact('order'));
     }
 
     public function show($id)
     {
         $order = Order::findOrfail($id);
-        return view('admin.orders.show', compact('order'));
+        return view('orders.show', compact('order'));
     }
 
     public function create()
     {
-        return view('admin.orders.create');
+        return view('orders.create');
     }
 
     public function store(Request $request)
     {
-        $validate->Validate([
+        $request->Validate([
         'customer_name'     => 'required|string|max:255',
             'customer_email'    => 'required|email|max:255',
             'customer_phone'    => 'required|string|max:20',
@@ -48,6 +48,6 @@ class OrderController extends Controller
             'status'            => $request->status,
         ]);
 
-        return redirect()->route('admin.orders.index')->with('success', 'Order created successfully.');
+        return redirect()->route('orders.index')->with('success', 'Order created successfully.');
     }
 }
