@@ -1,5 +1,5 @@
 <div class="container mx-auto px-4 py-8">
-    <h2 class="text-3xl font-bold text-gray-800 mb-8">New Arrivals</h2>
+    <h2 class="text-3xl font-bold text-white mb-8">New Arrivals</h2>
     
     @if($products && count($products) > 0)
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -36,12 +36,6 @@
                                 <span class="text-red-600 text-sm font-medium">Out of Stock</span>
                             @endif
                         </div>
-                        
-                        <button 
-                            class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition-colors duration-200 disabled:bg-gray-400 disabled:cursor-not-allowed"
-                            {{ $product->stock <= 0 ? 'disabled' : '' }}>
-                            {{ $product->stock > 0 ? 'Add to Cart' : 'Out of Stock' }}
-                        </button>
                     </div>
                 </div>
             @endforeach

@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\NewArrival;
+use App\Livewire\Shop;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
@@ -14,6 +15,7 @@ Route::get('/', fn() => view('welcome'));
 Route::get('/about', fn() => view('pages.about'));
 Route::get('/blog', fn() => view('pages.blog'));
 Route::get('/new-arrivals', NewArrival::class)->name('new-arrivals');
+Route::get('/shop', Shop::class)->name('shop');
 
 // Protected routes
 Route::middleware('auth')->group(function () {
