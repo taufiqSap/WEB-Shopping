@@ -69,13 +69,16 @@
     <div class="px-6 py-4 space-y-4">
         <!-- Logo di Mobile Menu -->
         <div class="flex items-center gap-3 pb-4 border-b border-gray-200">
-            <img src="{{ asset('logo.jpg') }}" alt="Sentul Fishing Logo" class="w-10 h-10 object-contain rounded-lg">
+            <img src="{{ asset('assets/logo.jpg') }}" alt="Sentul Fishing Logo" class="w-10 h-10 object-contain rounded-lg">
             <div>
-                <div class="text-lg font-bold text-blue-800">5F</div>
+                <div class="text-lg font-bold text-blue-800">SF</div>
                 <div class="text-xs text-gray-600">Sentul Fishing</div>
             </div>
         </div>
         
+        <a href="/" class="block py-3 text-gray-700 hover:text-blue-500 border-b border-gray-100 font-medium transition-colors duration-300">
+            Home
+        </a>
         <a href="/about" class="block py-3 text-gray-700 hover:text-blue-500 border-b border-gray-100 font-medium transition-colors duration-300">
             About Us
         </a>
@@ -99,3 +102,57 @@
 
 <!-- Spacer untuk konten -->
 <div class="h-16"></div>
+
+<script>
+    // Mobile Menu Toggle
+    const mobileMenuButton = document.getElementById('mobileMenuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+    
+    mobileMenuButton?.addEventListener('click', () => {
+        mobileMenu.classList.toggle('-translate-y-full');
+    });
+
+    // Update Cart Count Function
+    function updateCartCount() {
+        fetch('/cart/count')
+            .then(response => response.json())
+            .then(data => {
+                const cartCountElements = document.querySelectorAll('.cart-count');
+                cartCountElements.forEach(element => {
+                    element.textContent = data.count;
+                    
+                    // Add animation
+                    element.classList.add('scale-125');
+                    setTimeout(() => {
+                        element.classList.remove('scale-125');
+                    }, 300);
+                });
+            })
+            .catch(error => {
+                console.error('Error updating cart count:', error);
+            });
+    }
+
+    // Update cart count on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        updateCartCount();
+    });
+
+    // Listen for Livewire cartUpdated event
+    if (typeof Livewire !== 'undefined') {
+        document.addEventListener('livewire:initialized', () => {
+            Livewire.on('cartUpdated', () => {
+                updateCartCount();
+            });
+        });
+    }
+
+    // Fallback: Update cart count every 2 seconds (optional)
+    setInterval(updateCartCount, 2000);
+</script>
+
+<style>
+    .cart-count {
+        transition: transform 0.3s ease;
+    }
+</style>

@@ -2,6 +2,8 @@
 
 use App\Livewire\NewArrival;
 use App\Livewire\Shop;
+use App\Livewire\Cart;
+use App\Livewire\CreateOrder;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
@@ -16,6 +18,16 @@ Route::get('/about', fn() => view('pages.about'));
 Route::get('/blog', fn() => view('pages.blog'));
 Route::get('/new-arrivals', NewArrival::class)->name('new-arrivals');
 Route::get('/shop', Shop::class)->name('shop');
+Route::get('/cart', Cart::class)->name('cart');
+Route::get('checkout', CreateOrder::class)->name('checkout');
+Route::get('/cart/count', function() {
+    $cart = session()->get('cart', []);
+    $count = 0;
+    foreach ($cart as $item) {
+        $count += $item['quantity'];
+    }
+    return response()->json(['count' => $count]);
+});
 
 // Protected routes
 Route::middleware('auth')->group(function () {

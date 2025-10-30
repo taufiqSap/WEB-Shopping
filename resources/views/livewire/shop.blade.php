@@ -21,8 +21,8 @@
 
     <!-- Page Header -->
     <div class="mb-8">
-        <h1 class="text-3xl font-bold text-gray-900">Toko Online</h1>
-        <p class="text-gray-600 mt-2">Temukan produk terbaik dengan harga spesial</p>
+        <h1 class="text-3xl font-bold text-white">Online Shopping</h1>
+        <p class="text-gray-600 mt-2">Found the special product and cheap products here</p>
     </div>
 
     <!-- Products Grid -->
