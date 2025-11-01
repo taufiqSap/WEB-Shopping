@@ -120,57 +120,95 @@
                             <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
                             </svg>
-                            Metode Pembayaran
+                            Metode Pembayaran <span class="text-red-500">*</span>
                         </h3>
 
                         <div class="space-y-3">
-                            <label class="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                            <!-- QRIS -->
+                            <label class="flex items-start p-4 border-2 rounded-lg cursor-pointer transition-all duration-200
+                                {{ $payment_method === 'qris' ? 'border-blue-500 bg-blue-50' : 'border-gray-300 hover:bg-gray-50' }}">
                                 <input 
                                     type="radio" 
-                                    wire:model="payment_method" 
+                                    wire:model.live="payment_method" 
                                     value="qris"
-                                    class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
+                                    class="mt-1 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
                                 >
-                                <div class="ml-3 flex items-center">
-                                    <svg class="w-6 h-6 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"></path>
-                                    </svg>
-                                    <span class="font-medium text-gray-900">QRIS</span>
+                                <div class="ml-3 flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <svg class="w-6 h-6 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"></path>
+                                            </svg>
+                                            <span class="font-medium text-gray-900">QRIS</span>
+                                        </div>
+                                        @if($payment_method === 'qris')
+                                            <span class="text-xs bg-blue-500 text-white px-2 py-1 rounded-full">Dipilih</span>
+                                        @endif
+                                    </div>
+                                    <p class="text-sm text-gray-600 mt-1">Scan QR Code dengan aplikasi mobile banking</p>
+                                    <p class="text-xs text-gray-500 mt-1">✓ Proses instant • ✓ Aman & mudah</p>
                                 </div>
                             </label>
 
-                            <label class="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                            <!-- Bank Transfer -->
+                            <label class="flex items-start p-4 border-2 rounded-lg cursor-pointer transition-all duration-200
+                                {{ $payment_method === 'bank_transfer' ? 'border-blue-500 bg-blue-50' : 'border-gray-300 hover:bg-gray-50' }}">
                                 <input 
                                     type="radio" 
-                                    wire:model="payment_method" 
+                                    wire:model.live="payment_method" 
                                     value="bank_transfer"
-                                    class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
+                                    class="mt-1 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
                                 >
-                                <div class="ml-3 flex items-center">
-                                    <svg class="w-6 h-6 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"></path>
-                                    </svg>
-                                    <span class="font-medium text-gray-900">Transfer Bank</span>
+                                <div class="ml-3 flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <svg class="w-6 h-6 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"></path>
+                                            </svg>
+                                            <span class="font-medium text-gray-900">Transfer Bank</span>
+                                        </div>
+                                        @if($payment_method === 'bank_transfer')
+                                            <span class="text-xs bg-blue-500 text-white px-2 py-1 rounded-full">Dipilih</span>
+                                        @endif
+                                    </div>
+                                    <p class="text-sm text-gray-600 mt-1">Transfer ke rekening bank kami</p>
+                                    <p class="text-xs text-gray-500 mt-1">⏱ Verifikasi 1-2 hari kerja</p>
                                 </div>
                             </label>
 
-                            <label class="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                            <!-- COD -->
+                            <label class="flex items-start p-4 border-2 rounded-lg cursor-pointer transition-all duration-200
+                                {{ $payment_method === 'cod' ? 'border-blue-500 bg-blue-50' : 'border-gray-300 hover:bg-gray-50' }}">
                                 <input 
                                     type="radio" 
-                                    wire:model="payment_method" 
+                                    wire:model.live="payment_method" 
                                     value="cod"
-                                    class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
+                                    class="mt-1 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
                                 >
-                                <div class="ml-3 flex items-center">
-                                    <svg class="w-6 h-6 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                                    </svg>
-                                    <span class="font-medium text-gray-900">Cash on Delivery (COD)</span>
+                                <div class="ml-3 flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <svg class="w-6 h-6 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                            </svg>
+                                            <span class="font-medium text-gray-900">Cash on Delivery (COD)</span>
+                                        </div>
+                                        @if($payment_method === 'cod')
+                                            <span class="text-xs bg-blue-500 text-white px-2 py-1 rounded-full">Dipilih</span>
+                                        @endif
+                                    </div>
+                                    <p class="text-sm text-gray-600 mt-1">Bayar tunai saat barang diterima</p>
+                                    <p class="text-xs text-gray-500 mt-1">✓ Bayar saat terima • ✓ Cek kondisi barang dulu</p>
                                 </div>
                             </label>
                         </div>
                         @error('payment_method')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            <p class="mt-2 text-sm text-red-600 flex items-center">
+                                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                                </svg>
+                                {{ $message }}
+                            </p>
                         @enderror
                     </div>
 

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('customer_phone');
             $table->text('shipping_address');
             $table->decimal('total_price', 10, 2);
-            $table->string('payment_method')->default('qris');
+            $table->enum('payment_method', ['qris', 'bank_transfer', 'cod'])->default('qris');
             $table->enum('payment_status', ['unpaid', 'paid', 'failed'])->default('unpaid');
             $table->enum('status', ['pending', 'processing', 'completed', 'cancelled'])->default('pending');
             $table->timestamps();
