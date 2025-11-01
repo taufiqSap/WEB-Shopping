@@ -6,7 +6,7 @@
     @vite('resources/css/app.css')
     @livewireStyles
 </head>
-<body class="bg-gray-900">
+<body class="bg-gray-900 text-gray-100">
 
     {{-- Navbar di atas konten --}}
     @include('partials.navbar')
