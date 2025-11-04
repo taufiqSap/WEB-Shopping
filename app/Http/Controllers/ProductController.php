@@ -63,7 +63,7 @@ class ProductController extends Controller
             'description' => $request->description,
             'price' => $request->price,
             'stock' => $request->stock,
-            'image' => $imagePath, // ✅ konsisten
+            'image' => $imagePath, 
         ]);
 
         return redirect()->route('products.index')
